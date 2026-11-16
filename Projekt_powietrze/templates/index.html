@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Powietrze</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- CHMURY NA GÓRZE STRONY -->
+    <div class="niebo-chmury">
+        <div class="chmura c1"></div>
+        <div class="chmura c2"></div>
+        <div class="chmura c3"></div>
+    </div>
+
+    <main>
+        <h1>Powietrze</h1>
+
+        <!-- SEKCJA 1 -->
+        <div class="sekcja sekcja-1">
+            <div class="tekst">
+                <h2>Witaj na mojej stronie!</h2>
+                <p>Znajdziesz tutaj wszelakie informacje o reprodukcji powietrza, których zapewne nie wiedziałeś! Na przykład co możemy zrobić, jak trujące powietrze, czyli dwutlenek węgla, już zostało wyprodukowane – dowiesz się na tej stronie!</p>
+            </div>
+            <div class="obrazek">
+                <img src="{{ url_for('static', filename='img/maszyna.jpg') }}" alt="Maszyna filtrująca powietrze">
+            </div>
+        </div>
+
+        <!-- SEKCJA 2 -->
+        <div class="sekcja sekcja-2">
+            <div class="tekst">
+                <h2>Dlaczego jest tak ważne dbać o powietrze wokół nas?</h2>
+                <p>Gdy powietrze jest zanieczyszczone, to nie tylko na nas, ludzi, źle to wpływa – na płuca, ale też na wszelakie rośliny, zwierzęta, a nawet gleby i wody, więc jest to bardziej szkodliwe, niż większości się to wydaje. Zanieczyszczenie powietrza jest głównym czynnikiem zmiany klimatu, co wpływa na jeszcze więcej złych rzeczy.</p>
+            </div>
+            <div class="obrazek">
+                <img src="{{ url_for('static', filename='img/las.jpg') }}" alt="Zanieczyszczenie powietrza">
+            </div>
+        </div>
+
+        <!-- SEKCJA 3 -->
+        <div class="sekcja sekcja-3">
+            <div class="tekst">
+                <h2>Jak zmniejszyć ilość powstawania dwutlenku węgla?</h2>
+                <p>Przyczyn jest wiele, ale jest kilka głównych: transport, czyli auta, ciężarówki, samoloty, łódki i nawet rakiety. Przemysł, zakłady produkcyjne, elektrociepłownie i inne ogrzewanie domów, czyli spalanie węgla, drewna, a nawet nielegalnie plastiku – te wszystkie przyczyny są bardzo poważnymi problemami, które przyszła elektronika może mocno zredukować.</p>
+            </div>
+            <div class="obrazek">
+                <img src="{{ url_for('static', filename='img/smieci.jpg') }}" alt="Źródła emisji CO2">
+            </div>
+        </div>
+
+        <!-- SEKCJA 4 -->
+        <div class="sekcja sekcja-4">
+            <div class="tekst">
+                <h2>Jak usunąć nadmiar dwutlenku węgla, który został wyprodukowany?</h2>
+                <p>Odpowiedzią są maszyny filtrujące, czyli DAC (Direct Air Capture). To bardzo ważne urządzenie walczące ze zmianami klimatu i oczyszczaniem dużych ilości powietrza. Jest to bardzo nowoczesna i bardzo droga technologia, która stale się rozwija i z czasem będzie coraz bardziej potrzebna. Ale na razie, pomimo tej technologii, nie możemy wyfiltrować całego powietrza, ponieważ nie mamy wystarczającej technologii – obecnie filtruje tylko ułamek procenta światowych emisji. Technologia ta jest bardzo wymagająca, ponieważ musi być zasilana czystą energią odnawialną, inaczej produkowałaby więcej, niż usuwała. Pomimo ogromnych postępów tej technologii naukowcy potwierdzają, że bez odejścia od spalania paliw, ropy i innych źródeł produkcji CO2 i tak nie oczyścimy całego powietrza.</p>
+            </div>
+            <div class="obrazek">
+                <img src="{{ url_for('static', filename='img/auto.jpg') }}" alt="Technologia Direct Air Capture">
+            </div>
+        </div>
+
+        <!-- SEKCJA 5 -->
+        <div class="sekcja sekcja-5">
+            <div class="tekst">
+                <h2>Co każdy z nas może zrobić już dziś?</h2>
+                <p>Oprócz nowoczesnych technologii i wielkich fabryk ogromne znaczenie mają nasze codzienne wybory. Możemy częściej wybierać rower lub komunikację miejską zamiast samochodu, oszczędzać energię elektryczną w domu, sadzić drzewa oraz wspierać odnawialne źródła energii. Nawet małe kroki każdego człowieka składają się na wielką zmianę dla czystszego powietrza na całej planecie.</p>
+            </div>
+            <div class="obrazek">
+                <img src="{{ url_for('static', filename='img/maszyna2.jpg') }}" alt="Ekologiczne wybory">
+            </div>
+        </div>
+
+        <!-- PRZYCISK DO QUIZU NAD DROGĄ -->
+        <div class="quiz-start-container">
+            <button id="otworz-quiz" class="btn-quiz">Rozwiąż Quiz (10 pytań)</button>
+        </div>
+
+        <!-- AUTO PRZEJEŻDŻAJĄCE NA SAMYM DOLE STRONY (POD QUIZEM) -->
+        <div class="droga-kontener">
+            <div class="auto">
+                <div class="auto-dach"></div>
+                <div class="auto-karoseria"></div>
+                <div class="kolo kolo-tyl"></div>
+                <div class="kolo kolo-przod"></div>
+                <div class="dymek"></div>
+            </div>
+            <div class="ulica"></div>
+        </div>
+    </main>
+
+    <!-- OKNO Z QUIZEM (ukryte do momentu kliknięcia) -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span id="zamknij-quiz" class="close">&times;</span>
+            <h3>Quiz o powietrzu i CO2</h3>
+            <div id="quiz-body"></div>
+            <button id="sprawdz-quiz" class="btn-quiz">Sprawdź wynik</button>
+            <div id="wynik-quizu"></div>
+        </div>
+    </div>
+
+    <!-- SKRYPT OBSŁUGUJĄCY 10 PYTAŃ Z TEKSTU -->
+<!-- SKRYPT OBSŁUGUJĄCY 10 PYTAŃ Z PODŚWIETLANIEM ODPOWIEDZI -->
+    <script>
+        const pytania = [
+            {
+                pytanie: "1. Jaki gaz został nazwany w tekście 'trującym powietrzem'?",
+                odpowiedzi: ["Tlen", "Dwutlenek węgla", "Azot"],
+                poprawna: 1
+            },
+            {
+                pytanie: "2. Na co według tekstu wpływa zanieczyszczone powietrze?",
+                odpowiedzi: [
+                    "Tylko na płuca ludzi",
+                    "Na ludzi, rośliny, zwierzęta, gleby i wody",
+                    "Wyłącznie na rośliny"
+                ],
+                poprawna: 1
+            },
+            {
+                pytanie: "3. Czego głównym czynnikiem jest zanieczyszczenie powietrza?",
+                odpowiedzi: [
+                    "Zmiany klimatu",
+                    "Powstawania chmur deszczowych",
+                    "Szybszego wzrostu drzew"
+                ],
+                poprawna: 0
+            },
+            {
+                pytanie: "4. Co należy do głównych przyczyn powstawania dwutlenku węgla?",
+                odpowiedzi: [
+                    "Transport, przemysł oraz spalanie węgla, drewna i plastiku",
+                    "Sadzenie drzew i jazda na rowerze",
+                    "Elektrownie wiatrowe i słoneczne"
+                ],
+                poprawna: 0
+            },
+            {
+                pytanie: "5. Co według tekstu może w przyszłości mocno zredukować problemy z emisją CO2?",
+                odpowiedzi: [
+                    "Większa liczba fabryk węglowych",
+                    "Przyszła elektronika",
+                    "Spalanie plastiku w domach"
+                ],
+                poprawna: 1
+            },
+            {
+                pytanie: "6. Jak nazywają się nowoczesne maszyny filtrujące dwutlenek węgla z powietrza?",
+                odpowiedzi: ["GPS", "DAC", "LED"],
+                poprawna: 1
+            },
+            {
+                pytanie: "7. Ile światowych emisji filtruje obecnie technologia DAC?",
+                odpowiedzi: [
+                    "Prawie 100% całego powietrza",
+                    "Około ćwierć światowych emisji",
+                    "Tylko ułamek procenta"
+                ],
+                poprawna: 2
+            },
+            {
+                pytanie: "8. Czym muszą być zasilane maszyny DAC, aby nie produkowały więcej CO2, niż usuwają?",
+                odpowiedzi: [
+                    "Węglem kamiennym",
+                    "Ropą naftową",
+                    "Czystą energią odnawialną"
+                ],
+                poprawna: 2
+            },
+            {
+                pytanie: "9. Co potwierdzają naukowcy w kwestii oczyszczenia całego powietrza?",
+                odpowiedzi: [
+                    "Same maszyny DAC wystarczą bez żadnych innych zmian",
+                    "Bez odejścia od spalania paliw i ropy nie oczyścimy całego powietrza",
+                    "Nie da się w ogóle zmniejszyć ilości CO2"
+                ],
+                poprawna: 1
+            },
+            {
+                pytanie: "10. Co każdy z nas może zrobić już dziś dla czystszego powietrza?",
+                odpowiedzi: [
+                    "Częściej jeździć samochodem na krótkie dystanse",
+                    "Wybierać rower lub komunikację miejską, oszczędzać prąd i sadzić drzewa",
+                    "Spalać drewno i plastik w piecu"
+                ],
+                poprawna: 1
+            }
+        ];
+
+        const modal = document.getElementById("quiz-modal");
+        const btnOtworz = document.getElementById("otworz-quiz");
+        const btnZamknij = document.getElementById("zamknij-quiz");
+        const quizBody = document.getElementById("quiz-body");
+        const btnSprawdz = document.getElementById("sprawdz-quiz");
+        const wynikDiv = document.getElementById("wynik-quizu");
+
+        function zaladujQuiz() {
+            quizBody.innerHTML = "";
+            wynikDiv.innerHTML = "";
+            pytania.forEach((p, index) => {
+                let html = `<div class="pytanie-blok" id="blok-pytania-${index}"><p class="pytanie-tytul">${p.pytanie}</p>`;
+                p.odpowiedzi.forEach((odp, i) => {
+                    html += `
+                        <label class="odpowiedz-opcja" id="label-${index}-${i}">
+                            <input type="radio" name="pytanie${index}" value="${i}"> ${odp}
+                        </label>
+                    `;
+                });
+                html += `</div>`;
+                quizBody.innerHTML += html;
+            });
+        }
+
+        btnOtworz.onclick = () => {
+            zaladujQuiz();
+            modal.style.display = "flex";
+        };
+
+        btnZamknij.onclick = () => {
+            modal.style.display = "none";
+        };
+
+        btnSprawdz.onclick = () => {
+            let punkty = 0;
+
+            pytania.forEach((p, index) => {
+                const wybrana = document.querySelector(`input[name="pytanie${index}"]:checked`);
+                const blokPytania = document.getElementById(`blok-pytania-${index}`);
+                
+                // Usuwamy poprzednie podświetlenia, jeśli ktoś klikał drugi raz
+                blokPytania.style.padding = "10px";
+                blokPytania.style.borderRadius = "8px";
+
+                if (wybrana) {
+                    const wybranaWartosc = parseInt(wybrana.value);
+                    const labelWybranej = document.getElementById(`label-${index}-${wybranaWartosc}`);
+                    const labelPoprawnej = document.getElementById(`label-${index}-${p.poprawna}`);
+
+                    if (wybranaWartosc === p.poprawna) {
+                        punkty++;
+                        blokPytania.style.backgroundColor = "#e8f5e9"; // Jasnozielone tło dla poprawnego pytania
+                        labelWybranej.style.color = "#2e7d32";
+                        labelWybranej.style.fontWeight = "bold";
+                    } else {
+                        blokPytania.style.backgroundColor = "#ffebee"; // Jasnoczerwone tło dla błędnego pytania
+                        labelWybranej.style.color = "#c62828";
+                        labelWybranej.style.textDecoration = "line-through";
+                        
+                        // Pokazujemy poprawną odpowiedź na zielono
+                        labelPoprawnej.style.color = "#2e7d32";
+                        labelPoprawnej.style.fontWeight = "bold";
+                    }
+                } else {
+                    // Jeśli użytkownik nic nie zaznaczył w tym pytaniu
+                    blokPytania.style.backgroundColor = "#fffde7"; // Żółte tło (brak odpowiedzi)
+                    const labelPoprawnej = document.getElementById(`label-${index}-${p.poprawna}`);
+                    labelPoprawnej.style.color = "#2e7d32";
+                    labelPoprawnej.style.fontWeight = "bold";
+                }
+            });
+
+            wynikDiv.innerHTML = `Twój wynik: ${punkty} / ${pytania.length} pkt!`;
+        };
+    </script>
+
+</body>
+</html>
